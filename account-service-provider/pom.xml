@@ -14,6 +14,7 @@
   <name>Account Service Provider</name>
   <properties>
     <java.version>17</java.version>
+    <swagger-codegen-maven-plugin.version>3.0.57</swagger-codegen-maven-plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -43,6 +44,19 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>io.swagger.codegen.v3</groupId>
+          <artifactId>swagger-codegen-maven-plugin</artifactId>
+          <version>${swagger-codegen-maven-plugin.version}</version>
+          <configuration>
+            <inputSpec>openapi.yml</inputSpec>
+            <language>spring</language>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
