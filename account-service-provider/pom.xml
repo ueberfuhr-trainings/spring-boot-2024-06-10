@@ -14,6 +14,10 @@
   <name>Account Service Provider</name>
   <properties>
     <java.version>17</java.version>
+    <openapi-generator-maven-plugin.version>7.5.0</openapi-generator-maven-plugin.version>
+    <swagger-codegen-openapi.file>${project.basedir}/src/main/resources/static/openapi.yml</swagger-codegen-openapi.file>
+    <swagger-codegen-base-package>de.sample.schulung.accounts.boundary</swagger-codegen-base-package>
+    <swagger-annotations.version>2.2.22</swagger-annotations.version>
   </properties>
   <dependencies>
     <dependency>
@@ -23,6 +27,15 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-hateoas</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>${swagger-annotations.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -43,6 +56,37 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <!-- https://github.com/OpenAPITools/openapi-generator -->
+        <plugin>
+          <groupId>org.openapitools</groupId>
+          <artifactId>openapi-generator-maven-plugin</artifactId>
+          <version>${openapi-generator-maven-plugin.version}</version>
+          <configuration>
+            <!-- https://openapi-generator.tech/docs/generators/spring/ -->
+            <inputSpec>${swagger-codegen-openapi.file}</inputSpec>
+            <generatorName>spring</generatorName>
+            <!--library>test</library-->
+            <cleanupOutput>true</cleanupOutput>
+            <packageName>${swagger-codegen-base-package}</packageName>
+            <apiPackage>${swagger-codegen-base-package}.api</apiPackage>
+            <modelPackage>${swagger-codegen-base-package}.api.model</modelPackage>
+            <configOptions>
+              <!-- Disable Swagger Annotations (else: swagger2) -->
+              <annotationLibrary>none</annotationLibrary>
+              <!-- No OpenAPI documentation provider (Code first, else: springdoc) -->
+              <documentationProvider>none</documentationProvider>
+              <interfaceOnly>true</interfaceOnly>
+              <useJakartaEe>true</useJakartaEe>
+              <dateLibrary>java8</dateLibrary>
+              <useBeanValidation>true</useBeanValidation>
+              <openApiNullable>false</openApiNullable>
+            </configOptions>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -55,6 +99,17 @@
             </exclude>
           </excludes>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
