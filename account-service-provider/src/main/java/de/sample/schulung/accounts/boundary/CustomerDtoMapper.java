@@ -4,7 +4,7 @@ import de.sample.schulung.accounts.domain.Customer;
 import jakarta.validation.ValidationException;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CustomerDtoMapper {
 
   CustomerDto map(Customer source);
