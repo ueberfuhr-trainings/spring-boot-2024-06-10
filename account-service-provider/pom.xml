@@ -14,7 +14,7 @@
   <name>Account Service Provider</name>
   <properties>
     <java.version>17</java.version>
-    <swagger-codegen-maven-plugin.version>3.0.57</swagger-codegen-maven-plugin.version>
+    <openapi-generator-maven-plugin.version>7.5.0</openapi-generator-maven-plugin.version>
     <swagger-codegen-openapi.file>src/main/resources/static/openapi.yml</swagger-codegen-openapi.file>
     <swagger-codegen-base-package>de.sample.schulung.accounts.boundary</swagger-codegen-base-package>
     <swagger-annotations.version>2.2.22</swagger-annotations.version>
@@ -58,22 +58,30 @@
   <build>
     <pluginManagement>
       <plugins>
+        <!-- https://github.com/OpenAPITools/openapi-generator -->
         <plugin>
-          <groupId>io.swagger.codegen.v3</groupId>
-          <artifactId>swagger-codegen-maven-plugin</artifactId>
-          <version>${swagger-codegen-maven-plugin.version}</version>
+          <groupId>org.openapitools</groupId>
+          <artifactId>openapi-generator-maven-plugin</artifactId>
+          <version>${openapi-generator-maven-plugin.version}</version>
           <configuration>
+            <!-- https://openapi-generator.tech/docs/generators/spring/ -->
             <inputSpec>${swagger-codegen-openapi.file}</inputSpec>
-            <language>spring</language>
-            <library>spring-mvc</library>
-            <basePackage>${swagger-codegen-base-package}</basePackage>
+            <generatorName>spring</generatorName>
+            <!--library>test</library-->
+            <cleanupOutput>true</cleanupOutput>
+            <packageName>${swagger-codegen-base-package}</packageName>
             <apiPackage>${swagger-codegen-base-package}.api</apiPackage>
             <modelPackage>${swagger-codegen-base-package}.api.model</modelPackage>
             <configOptions>
-              <jakarta>true</jakarta>
+              <!-- Disable Swagger Annotations (else: swagger2) -->
+              <annotationLibrary>none</annotationLibrary>
+              <!-- No OpenAPI documentation provider (Code first, else: springdoc) -->
+              <documentationProvider>none</documentationProvider>
               <interfaceOnly>true</interfaceOnly>
-              <java11>true</java11>
+              <useJakartaEe>true</useJakartaEe>
               <dateLibrary>java8</dateLibrary>
+              <useBeanValidation>true</useBeanValidation>
+              <openApiNullable>false</openApiNullable>
             </configOptions>
           </configuration>
         </plugin>
@@ -93,11 +101,10 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>io.swagger.codegen.v3</groupId>
-        <artifactId>swagger-codegen-maven-plugin</artifactId>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
         <executions>
           <execution>
-            <phase>generate-resources</phase>
             <goals>
               <goal>generate</goal>
             </goals>

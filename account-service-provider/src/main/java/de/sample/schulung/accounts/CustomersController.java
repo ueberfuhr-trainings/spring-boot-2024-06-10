@@ -55,7 +55,7 @@ public class CustomersController implements CustomersApi {
     customer.setUuid(uuid);
     this.customers.put(uuid, customer);
     var uri = linkTo(
-      methodOn(CustomersApi.class)
+      methodOn(CustomersController.class)
         .customersIdGet(uuid)
     ).toUri();
     return ResponseEntity
@@ -85,7 +85,8 @@ public class CustomersController implements CustomersApi {
 
   @Override
   public ResponseEntity<Void> customersIdDelete(UUID uuid) {
-    if(this.customers.remove(uuid) != null) {
+    var deletedCustomer = this.customers.remove(uuid);
+    if(deletedCustomer == null) {
       throw new NotFoundException();
     }
     return ResponseEntity.noContent().build();
