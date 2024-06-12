@@ -15,7 +15,7 @@
   <properties>
     <java.version>17</java.version>
     <openapi-generator-maven-plugin.version>7.5.0</openapi-generator-maven-plugin.version>
-    <swagger-codegen-openapi.file>src/main/resources/static/openapi.yml</swagger-codegen-openapi.file>
+    <swagger-codegen-openapi.file>${project.basedir}/src/main/resources/static/openapi.yml</swagger-codegen-openapi.file>
     <swagger-codegen-base-package>de.sample.schulung.accounts.boundary</swagger-codegen-base-package>
     <swagger-annotations.version>2.2.22</swagger-annotations.version>
   </properties>
