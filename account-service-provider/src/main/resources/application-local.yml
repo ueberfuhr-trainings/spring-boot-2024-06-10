@@ -2,3 +2,13 @@ application:
   customers:
     initialization:
       enabled: true
+spring:
+  datasource:
+    url: jdbc:h2:./.local-db/customers
+      #h2:
+    #console:
+    #enabled: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
