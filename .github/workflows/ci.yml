@@ -13,6 +13,7 @@ on:
       - '**/*.md'
       - '.gitignore'
       - '.editorconfig'
+  workflow_dispatch:
 
 jobs:
   build:
