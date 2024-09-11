@@ -1,6 +1,6 @@
 # Spring Boot - Grundlagen
 
-[![CI Build](https://github.com/ralf-ueberfuhr-ars/spring-boot-2024-06-10/actions/workflows/ci.yml/badge.svg)](https://github.com/ralf-ueberfuhr-ars/spring-boot-2024-06-10/actions/workflows/ci.yml)
+[![CI Build](https://github.com/ueberfuhr-trainings/spring-boot-2024-06-10/actions/workflows/ci.yml/badge.svg)](https://github.com/ueberfuhr-trainings/spring-boot-2024-06-10/actions/workflows/ci.yml)
 
 ## Inhalte:
 
