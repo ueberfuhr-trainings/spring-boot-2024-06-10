@@ -40,7 +40,7 @@ public class CustomersInitializer {
 
   @EventListener(ContextRefreshedEvent.class)
   public void init() {
-    if(this.config.enabled) {
+    if (this.config.enabled && service.count() < 1) {
       log.info("Initializing customers");
       service.createCustomer(
         new Customer(

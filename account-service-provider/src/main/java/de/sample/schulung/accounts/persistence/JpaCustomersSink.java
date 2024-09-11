@@ -17,6 +17,12 @@ public class JpaCustomersSink implements CustomersSink {
   private final CustomerEntityMapper mapper;
 
   @Override
+  public long count() {
+    return repo
+      .count();
+  }
+
+  @Override
   public Stream<Customer> getCustomers() {
     return repo
       .findAll()

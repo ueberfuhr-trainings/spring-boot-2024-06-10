@@ -8,27 +8,31 @@ import java.util.stream.Stream;
 
 public interface CustomersSink {
 
-  Stream<Customer> getCustomers();
+    default long count() {
+        return getCustomers().count();
+    }
 
-  default Optional<Customer> findCustomerById(@NotNull UUID uuid) {
-    return getCustomers()
-      .filter(c -> c.getUuid().equals(uuid))
-      .findFirst();
-  }
+    Stream<Customer> getCustomers();
 
-  default Stream<Customer> getCustomersByState(@NotNull Customer.CustomerState state) {
-    return getCustomers()
-      .filter(customer -> state.equals(customer.getState()));
-  }
+    default Optional<Customer> findCustomerById(@NotNull UUID uuid) {
+        return getCustomers()
+                .filter(c -> c.getUuid().equals(uuid))
+                .findFirst();
+    }
 
-  default boolean customerExists(UUID uuid) {
-    return findCustomerById(uuid).isPresent();
-  }
+    default Stream<Customer> getCustomersByState(@NotNull Customer.CustomerState state) {
+        return getCustomers()
+                .filter(customer -> state.equals(customer.getState()));
+    }
 
-  void createCustomer(Customer customer);
+    default boolean customerExists(UUID uuid) {
+        return findCustomerById(uuid).isPresent();
+    }
 
-  void replaceCustomer( Customer customer);
+    void createCustomer(Customer customer);
 
-  void deleteCustomer(@NotNull UUID uuid);
+    void replaceCustomer(Customer customer);
+
+    void deleteCustomer(@NotNull UUID uuid);
 
 }
