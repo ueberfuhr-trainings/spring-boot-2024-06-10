@@ -25,6 +25,7 @@ public class CustomerEntity {
   private String name;
   @Column(name = "BIRTH_DATE")
   private LocalDate dateOfBirth;
+  // @Enumerated(EnumType.STRING)
   private Customer.CustomerState state;
 
 }

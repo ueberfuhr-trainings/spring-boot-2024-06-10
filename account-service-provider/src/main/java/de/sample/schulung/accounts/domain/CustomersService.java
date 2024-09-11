@@ -17,6 +17,10 @@ public class CustomersService {
 
   private final CustomersSink sink;
 
+  public long count() {
+    return sink.count();
+  }
+
   public Stream<Customer> getCustomers() {
     return sink.getCustomers();
   }
